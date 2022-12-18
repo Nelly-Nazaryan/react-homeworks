@@ -1,0 +1,9 @@
+.paragraphWithTitle {
+    padding: 20px 120px;
+    margin: 15px 0px;
+    text-align: center;
+}
+
+.paragraphWithTitle p {
+    color: grey;
+}
