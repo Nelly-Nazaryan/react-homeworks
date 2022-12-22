@@ -1,18 +1,22 @@
 .header {
     display: block;
     width: 100%;
-    height: 40vw;
-    position: relative;
+    height: 500px;
+    position: absolute;
+    overflow: hidden;
 }
 
 .headerBg {
-    height: 100%;
+    width: 100%;
+    position: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    z-index: -1;
 }
 
 .content {
+    width: 100%;
     position: absolute;
     bottom: 50px;
     display: flex;
@@ -22,4 +26,27 @@
 
 .titleContainer {
     color: #fff;
+}
+
+.navLink {
+    background: no-repeat;
+    border: navajowhite;
+    color: #fff;
+    font-size: 20px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.activeLink {
+    border-bottom: 2px solid #fff;
+}
+
+.navLink:hover {
+    border-bottom: 2px solid #fff;
+}
+
+.headerContainer {
+    height: 500px;
+    overflow: hidden;
+    position: relative;
 }

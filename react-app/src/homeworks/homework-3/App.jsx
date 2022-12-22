@@ -1,16 +1,42 @@
 import React, { Component } from 'react'
 import './App.css'
 import Header from './components/Header'
-import ParagraphWithTitle from './components/ParagraphWithTitle'
-import TabContainer from './components/TabContainer/TabContainer'
+import { About, Contact, Home } from './pages'
+
+const pages = [
+    {
+        value: 'home',
+        Component: Home,
+    },
+    {
+        value: 'about',
+        Component: About,
+    },
+    {
+        value: 'contact',
+        Component: Contact,
+    }
+]
 
 export default class App extends Component {
+  state = {
+    activePage: pages[2]
+  }
+
+  handlePage = (pageName) => {
+    this.setState({
+        activePage: pages.find(page => page.value === pageName)
+    })
+  }
+
   render() {
+    const { Component: ActivePage } = this.state.activePage;
     return (
       <div className='App'>
-        <Header />
-        <ParagraphWithTitle />
-        <TabContainer />
+        <Header activePage={this.state.activePage.value} handlePage={this.handlePage} />
+        <div className='appContent'>
+            <ActivePage />
+        </div>
       </div>
     )
   }
