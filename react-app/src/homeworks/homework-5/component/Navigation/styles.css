@@ -1,0 +1,17 @@
+.navigation {
+    height: 100%;
+    width: 320px;
+    background-color: grey;
+}
+
+.link {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.link button {
+    font-size: 15px;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
