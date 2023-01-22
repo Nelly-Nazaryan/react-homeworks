@@ -1,10 +1,12 @@
 import { createContext, useContext, useMemo, useReducer, useState } from "react"
+import { createUser } from "./api";
 
 const AppContext = createContext({});
 
 const ACTIONS = {
     ADD_USER: 'ADD_USER',
     REMOVE_USER: 'REMOVE_USER',
+    SET_USERS: 'SET_USERS',
 }
 
 const reducer = (state, action) => {
@@ -15,6 +17,9 @@ const reducer = (state, action) => {
       case ACTIONS.REMOVE_USER:
         const { payload: { id } } = action;
         return state.filter(user => user.id !== id);
+      case ACTIONS.SET_USERS:
+        const { payload: { users } } = action;
+        return users;
       default:
         throw new Error('No action');
     }
@@ -24,16 +29,18 @@ export const AppContextProvide = ({ children }) => {
     const [users, dispatch] = useReducer(reducer, []);
 
     const addUser = (user) => {
-        dispatch({ type: ACTIONS.ADD_USER, payload: user })
+        createUser(user);
+        dispatch({ type: ACTIONS.ADD_USER, payload: user });
     }
-    const removeUser = (id) => {
-        dispatch({ type: ACTIONS.ADD_USER, payload: { id } })
+
+    const setUsers = users => {
+        dispatch({ type: ACTIONS.SET_USERS, payload: { users } });
     }
 
     const context =  useMemo(() => ({
         users,
         addUser,
-        removeUser,
+        setUsers,
     }), [users])
 
     return <AppContext.Provider value={context}>

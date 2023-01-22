@@ -19,10 +19,7 @@ function AddUser({ context }) {
 
     const {
         addUser,
-        users
     } = context;
-
-    console.log(context, 'context');
 
     const setFieldValue = (value, fieldName) => {
         setFields(prev => ({ ...prev, [fieldName]: value }))

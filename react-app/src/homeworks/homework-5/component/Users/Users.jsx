@@ -1,11 +1,24 @@
 import React from 'react'
+import { useEffect } from 'react';
+import { getUsers } from '../../api';
 import { withAppContext } from '../../AppContext'
 
 function Users({ context }) {
-    console.log(context, 'context');
+    const getUsersHandler = async () => {
+        const data = await getUsers();
+
+        setUsers(data?.data?.map(user => user?.data));
+    }
+
+    useEffect(() => {
+        getUsersHandler();
+    }, [])
+
     const {
-        users
+        users,
+        setUsers,
     } = context;
+
     return (
         <div>
             <table>

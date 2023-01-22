@@ -23,8 +23,6 @@ export default function App() {
 
     const ActiveScene = SCENES[activeScene].Component
 
-    console.log(ActiveScene);
-
     return (
         <AppContextProvide>
             <div className='todoApp'>
