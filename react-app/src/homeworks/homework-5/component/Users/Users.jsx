@@ -1,9 +1,16 @@
 import React from 'react'
 import { useEffect } from 'react';
-import { getUsers } from '../../api';
-import { withAppContext } from '../../AppContext'
+import {useDispatch, useSelector} from "react-redux";
 
-function Users({ context }) {
+import { getUsers } from '../../api';
+import { ACTIONS } from '../../store/actions';
+
+function Users() {
+    const users = useSelector(state => state.users);
+    const dispatch = useDispatch()
+
+    const setUsers = users => dispatch({ type: ACTIONS.SET_USERS, payload: { users } })
+
     const getUsersHandler = async () => {
         const data = await getUsers();
 
@@ -14,10 +21,6 @@ function Users({ context }) {
         getUsersHandler();
     }, [])
 
-    const {
-        users,
-        setUsers,
-    } = context;
 
     return (
         <div>
@@ -68,4 +71,4 @@ function Users({ context }) {
     )
 }
 
-export default withAppContext(Users)
+export default Users;

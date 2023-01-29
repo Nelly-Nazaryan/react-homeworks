@@ -1,6 +1,8 @@
 import React from 'react'
 import { useState } from 'react'
-import { withAppContext } from '../../AppContext';
+import {useDispatch, useSelector} from "react-redux";
+import { ACTIONS } from '../../store/actions';
+
 import './styles.css'
 
 const initialState = {
@@ -14,12 +16,13 @@ const initialState = {
     date: null,
 }
 
-function AddUser({ context }) {
+function AddUser() {
     const [fields, setFields] = useState(initialState);
 
-    const {
-        addUser,
-    } = context;
+    const dispatch = useDispatch();
+
+    const addUser = user => {
+        dispatch({ type: ACTIONS.ADD_USER, payload: { user } })};
 
     const setFieldValue = (value, fieldName) => {
         setFields(prev => ({ ...prev, [fieldName]: value }))
@@ -68,4 +71,4 @@ function AddUser({ context }) {
     )
 }
 
-export default withAppContext(AddUser);
+export default AddUser;

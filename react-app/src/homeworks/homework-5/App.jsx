@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
-import { AppContextProvide } from './AppContext';
+import { Provider } from "react-redux";
+
 import { AddUser, Navigation, Users } from './component';
+import store from './store/store';
 import './styles.css';
 
 const SCENES = {
@@ -24,11 +26,11 @@ export default function App() {
     const ActiveScene = SCENES[activeScene].Component
 
     return (
-        <AppContextProvide>
+        <Provider store={store}>
             <div className='todoApp'>
                 <Navigation changeScene={changeScene} />
                 <ActiveScene />
             </div>
-        </AppContextProvide>
+        </Provider>
     )
 }
