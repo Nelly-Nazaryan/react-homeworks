@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import {useDispatch, useSelector} from "react-redux";
+import { createUser } from '../../api';
 import { ACTIONS } from '../../store/actions';
 
 import './styles.css'
@@ -22,7 +23,9 @@ function AddUser() {
     const dispatch = useDispatch();
 
     const addUser = user => {
-        dispatch({ type: ACTIONS.ADD_USER, payload: { user } })};
+        createUser(user);
+        dispatch({ type: ACTIONS.ADD_USER, payload: { user } });
+    };
 
     const setFieldValue = (value, fieldName) => {
         setFields(prev => ({ ...prev, [fieldName]: value }))
